@@ -8,6 +8,8 @@ from django.contrib.auth import authenticate
 
 from .forms import RegisterForm
 
+from django.contrib.auth.models import User
+
 def index(request):
 
     context = {
@@ -60,8 +62,20 @@ def logout_view(request):
     return redirect('login')    
 
 def register(request):
-    form = RegisterForm()
+    form = RegisterForm(request.POST or None) 
 
+    if request.method == 'POST' and form.is_valid():
+        username = form.cleaned_data.get('username')
+        email = form.cleaned_data.get('email')        
+        password = form.cleaned_data.get('password')
+
+        user = User.objects.create_user(username,email,password) #Modelo User predefinido por django
+
+        if user: #Valido que el usuario se haya creado
+            login(request, user)
+            messages.success(request,'Usuario creado exitosamente')
+            return redirect('index')
+    
     context = {
         'form' : form 
     }
