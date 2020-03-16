@@ -65,11 +65,9 @@ def register(request):
     form = RegisterForm(request.POST or None) 
 
     if request.method == 'POST' and form.is_valid():
-        username = form.cleaned_data.get('username')
-        email = form.cleaned_data.get('email')        
-        password = form.cleaned_data.get('password')
+        
 
-        user = User.objects.create_user(username,email,password) #Modelo User predefinido por django
+        user = form.save()
 
         if user: #Valido que el usuario se haya creado
             login(request, user)
@@ -77,6 +75,7 @@ def register(request):
             return redirect('index')
     
     context = {
-        'form' : form 
+        'form' : form ,
+        'title': 'registro de usuarios'
     }
     return render(request, 'users/register.html',context)
