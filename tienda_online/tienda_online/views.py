@@ -36,6 +36,8 @@ def index(request):
     return render(request, 'index.html', context) 
 
 def login_view(request):
+    if request.user.is_authenticated:
+        return redirect('index')    
 
     if request.method == 'POST':
 
@@ -62,6 +64,10 @@ def logout_view(request):
     return redirect('login')    
 
 def register(request):
+
+    if request.user.is_authenticated:
+        return redirect('index')
+
     form = RegisterForm(request.POST or None) 
 
     if request.method == 'POST' and form.is_valid():
