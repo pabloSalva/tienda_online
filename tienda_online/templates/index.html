@@ -7,28 +7,15 @@
 
 {% block content %}
  {% include 'messages.html' %}
+
     
-    <div class="row">
+   
         <div class="col">
-            <h1>{{ message }}</h1>
+            <h1 class="text-center">{{ message }}</h1>
+            {% include 'products/snippets/search.html' %}
 
-            <ul class="list-group">
-                {% for product in products %}
-                    <li class="list-group-item">
-                        {{product.title}} 
-                        {{product.price}} 
-                        {% if product.stock %}
-                        <span class="text-success">Disponible</span>
-                        {% else %}
-                        <span class="text-danger">No disponible</span>
-                        {% endif %}
-                        
-                    </li>   
-                {%endfor%}
-            </ul>    
-
+            {% include 'products/snippets/list.html' %}
         </div>
-    </div>
 
 {% endblock content %}
 

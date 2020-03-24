@@ -10,29 +10,15 @@ from .forms import RegisterForm
 
 from django.contrib.auth.models import User
 
-def index(request):
+from products.models import Product
 
+def index(request):
+    products = Product.objects.all().order_by('price')
     context = {
-       'message' : 'listado de productos',
-       'title' : 'productos' ,
-       'products' : [
-            {
-                'title' : 'camara bullet', 
-                'price' : 100,
-                'stock' : True
-            },
-            {
-                'title' : 'cable utp-5e',
-                'price' : 500,
-                'stock' : True
-            },
-            {
-                'title' : 'cable utp-6e',
-                'price' : 800,
-                'stock' : False
+                'message' : 'listado de productos',
+                'title' : 'productos' ,
+                'products' : products
             }
-       ]
-    }
     return render(request, 'index.html', context) 
 
 def login_view(request):

@@ -1,0 +1,39 @@
+Respaldo de información formato json
+
+en terminal tipear:
+
+-python manage.py dumpdata
+
+Esto me mostrará los datos almacenados en la base de datos
+
+para traer los datos que quiero respaldar aclaro la aplicacion y la clase que necesito
+
+-python manage.py dumpdata products.product
+
+
+Luego le doy formato json y legibilidad
+
+-python manage.py dumpdata products.product --format=json --indent=4
+
+esta información la grabo en un archivo que se almacena en la siguiente dirección
+
+products/fixtures/products.json
+
+Entonces el comando quedaría:
+
+
+-python manage.py dumpdata products.product --format=json --indent=4 > products/fixtures/products.json
+
+
+Para restaurar la base de datos usamos:
+
+python manage.py loaddata products.json
+
+sin necesidad de aclarar la ruta completa, ya que django se encarga de buscar en todas las carpetas
+fixtures el archivo deseado.
+
+
+
+
+
+

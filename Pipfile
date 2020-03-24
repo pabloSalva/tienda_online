@@ -5,9 +5,12 @@ verify_ssl = true
 
 [dev-packages]
 pylint = "*"
+flake8 = "*"
 
 [packages]
 django = "*"
+pylint-django = "*"
+pillow = "*"
 
 [requires]
 python_version = "3.6"

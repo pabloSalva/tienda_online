@@ -14,13 +14,27 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from . import views
+from products.views import ProductListView
+
+#las dos librerias siguientes son para enlazar las imagenes a las urls
+
+from django.conf.urls.static import static
+from django.conf import settings
+
 
 urlpatterns = [
-    path('',views.index, name='index'),
+    path('',ProductListView.as_view(), name='index'),
     path('usuarios/login',views.login_view, name='login'),
     path('usuarios/logout',views.logout_view, name='logout'),
     path('usuarios/registro',views.register, name='register'),
     path('admin/', admin.site.urls),
+
+    path('product/', include('products.urls')),
+    path('carrito/', include('carts.urls')),
 ]
+
+if settings.DEBUG: #ESTA CONDICION NOS PERMITIRÁ MOSTRAR LAS IMAGENES EN NUESTRO TEMPLATE
+    urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+

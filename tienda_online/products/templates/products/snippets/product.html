@@ -1,0 +1,24 @@
+<div class="col-3 mt-5">
+    <div class = "card h-100">
+        {% if product.image %}
+            <img src = "{{ product.image.url}}" alt = "imagen del producto" height = "200">
+        {% endif %}
+        <div class = "card-body">
+            <h5 class = "card-title">{{product.title}}</h5>
+            <p class = "card-text">{{product.description}}</p>
+            <a href = "{% url 'products:product' product.slug %}" class = "btn btn-primary">Detalles</a>
+        </div>
+    </div>
+</div>
+
+
+                    {% comment %} <li class="list-group-item">
+                        {{product.title}} 
+                        {{product.price}}  {% endcomment %}
+                        {% comment %} {% if product.stock %}
+                        <span class="text-success">Disponible</span>
+                        {% else %}
+                        <span class="text-danger">No disponible</span>
+                        {% endif %}
+                         {% endcomment %}
+                      
