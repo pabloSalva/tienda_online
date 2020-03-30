@@ -1,0 +1,28 @@
+[
+{
+    "model": "products.product",
+    "pk": 1,
+    "fields": {
+        "title": "cable utp cat 5e",
+        "description": "cable utp furukawa categoria 5e 305 mts",
+        "price": "100.00",
+        "model": "utp-5eFuru",
+        "image": "products/utp_cat_5e_furukawa.png",
+        "slug": "cable-utp-cat-5e",
+        "created_at": "2020-03-21T20:27:28.627Z"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 2,
+    "fields": {
+        "title": "cable utp cat 6e",
+        "description": "Cable utp categor\u00eda 6e furukawa 305 mt.\r\ncobre 99.99%",
+        "price": "150.00",
+        "model": "upt-6e-furuwawa",
+        "image": "products/utp_furukawa_6e.jpg",
+        "slug": "cable-utp-cat-6e",
+        "created_at": "2020-03-25T17:29:36.115Z"
+    }
+}
+]

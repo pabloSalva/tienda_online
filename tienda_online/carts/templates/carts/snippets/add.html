@@ -1,0 +1,12 @@
+<form  action="{% url 'carts:add' %}" method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="product_id" value="{{ product.id }}">
+    <div class="mt-3">
+        <button type="button" class="btn btn-info d-inline" id="remove">-</button>
+        <input type="number" value="1" class="form-control col-sm-1 d-inline" id="quantity" name="quantity" readonly>
+        <button type="button" class="btn btn-info" id="add">+</button>
+
+    </div>
+
+    <button type="submit" class="btn btn-warning mt-3" >Agregar producto</button>
+</form>

@@ -1,6 +1,6 @@
 {
     "python.pythonPath": "/home/pablin/.local/share/virtualenvs/Store-7-NX-V0F/bin/python",
-    "python.linting.pylintEnabled": false,
-    "python.linting.flake8Enabled": true,
+    "python.linting.pylintEnabled": true,
+    "python.linting.flake8Enabled": false,
     "python.linting.enabled": true
 }
