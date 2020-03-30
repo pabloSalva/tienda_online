@@ -31,7 +31,24 @@ class Cart(models.Model):
 
     def update_total(self):
         self.total = self.subtotal +  (self.subtotal * decimal.Decimal(Cart.FEE)) 
-        self.save()   
+        self.save()  
+
+    #método para evitar el problema de n +1 query. utilizo el metodo select_related
+    #esto obtiene todos los objetos CartProducts y Products en una sola linea de código.
+    def products_related(self):
+        return self.cartproducts_set.select_related('product')     
+
+class CartProductManager(models.Manager):
+
+    def create_or_update_quantity(self, cart, product, quantity=1):
+        object, created = self.get_or_create(cart=cart, product=product)
+
+        if not created:
+            quantity = object.quantity + quantity
+
+        object.update_quantity(quantity) 
+        return object
+
 
 class CartProducts(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
@@ -39,6 +56,12 @@ class CartProducts(models.Model):
     quantity = models.IntegerField(default=1)
     created_at = models.DateTimeField(auto_now_add=True)
     
+    objects = CartProductManager()
+
+    def update_quantity(self, quantity=1):
+        self.quantity = quantity
+        self.save()
+        
 
 #implemento un callback para asignar el cart_id
 
