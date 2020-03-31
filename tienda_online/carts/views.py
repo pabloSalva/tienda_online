@@ -26,6 +26,8 @@ def add(request):
 
     # cart.products.add(product, through_defaults={'quantity':quantity})
     context = {
+        'cart_product': cart_product,
+        'quantity': quantity,
         'product':product
     }   
 

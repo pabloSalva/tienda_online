@@ -4,7 +4,7 @@ from django.db import models
 from django.contrib.auth.models import User 
 from products.models import Product
 
-from django.db.models.signals import pre_save
+from django.db.models.signals import pre_save, post_save
 from django.db.models.signals import m2m_changed
 
 
@@ -26,7 +26,11 @@ class Cart(models.Model):
         self.update_total()
 
     def update_subtotal(self):
-        self.subtotal = sum([product.price for product in self.products.all() ])
+        self.subtotal = sum([
+            #calculo el subtotal de toda la lista de productos teniendo en cuenta la cantidad de cada producto
+            cp.quantity * cp.product.price for cp in self.products_related()
+         
+         ])
         self.save()
 
     def update_total(self):
@@ -39,6 +43,7 @@ class Cart(models.Model):
         return self.cartproducts_set.select_related('product')     
 
 class CartProductManager(models.Manager):
+    #método para extender al objeto objects en views.add()
 
     def create_or_update_quantity(self, cart, product, quantity=1):
         object, created = self.get_or_create(cart=cart, product=product)
@@ -61,7 +66,7 @@ class CartProducts(models.Model):
     def update_quantity(self, quantity=1):
         self.quantity = quantity
         self.save()
-        
+
 
 #implemento un callback para asignar el cart_id
 
@@ -80,4 +85,8 @@ def update_totals(sender, instance, action, *args, **kwargs):
 
 m2m_changed.connect(update_totals, sender=Cart.products.through)        
 
+#callback para los objetos de tipo CartProducts 
+def post_save_update_totals(sender, instance, *args, **kwargs):
+    instance.cart.update_totals()
 
+post_save.connect(post_save_update_totals, sender = CartProducts)
