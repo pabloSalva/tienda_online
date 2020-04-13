@@ -33,6 +33,8 @@ urlpatterns = [
 
     path('product/', include('products.urls')),
     path('carrito/', include('carts.urls')),
+    path('orden/', include('orders.urls')),
+    path('direcciones/', include('shipping_address.urls')),
 ]
 
 if settings.DEBUG: #ESTA CONDICION NOS PERMITIRÁ MOSTRAR LAS IMAGENES EN NUESTRO TEMPLATE

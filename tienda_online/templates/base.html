@@ -16,8 +16,12 @@
     {% include 'navbar.html' %}
 
    <div class="container">
+
+    {% block breadcrumb %}
+    {% endblock breadcrumb %}
     <div class="row mt-4">
 
+ 
 
         {% block content %}
         

@@ -12,7 +12,7 @@ def get_or_create_cart(request):
     if user and cart.user is None:
         cart.user = user
         cart.save()
-
+    
     request.session['cart_id'] = cart.cart_id   #con esto ya generamos la session que almacena el id del carrito de compras 
 
     return cart

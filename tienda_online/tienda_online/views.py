@@ -6,6 +6,8 @@ from django.contrib.auth import login
 from django.contrib.auth import logout
 from django.contrib.auth import authenticate
 
+from django.http import HttpResponseRedirect
+
 from .forms import RegisterForm
 
 from django.contrib.auth.models import User
@@ -35,6 +37,9 @@ def login_view(request):
         if user:
             login(request,user)
             messages.success(request, 'bienvenide {}'.format(user.username))
+            if request.GET.get('next'):
+                return HttpResponseRedirect(request.GET['next'])
+            
             return redirect('index')     
         else: 
             messages.error(request, 'Usuario o constraseña invalidos')    

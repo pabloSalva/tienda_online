@@ -19,11 +19,14 @@ class Cart(models.Model):
     FEE = 0.21
 
     def __str__(self):
-        return ''
+        return self.cart_id
 
     def update_totals(self):
         self.update_subtotal()
         self.update_total()
+        #me conecto con el modelo Order a través de la relación uno a muchos como sigue:
+        if self.order:
+            self.order.update_total()
 
     def update_subtotal(self):
         self.subtotal = sum([
@@ -40,7 +43,16 @@ class Cart(models.Model):
     #método para evitar el problema de n +1 query. utilizo el metodo select_related
     #esto obtiene todos los objetos CartProducts y Products en una sola linea de código.
     def products_related(self):
-        return self.cartproducts_set.select_related('product')     
+        return self.cartproducts_set.select_related('product')    
+
+
+    #defino un property para centralizar la obtencion de una orden con respecto a un carrito
+    @property
+    def order(self):
+        return self.order_set.first()
+
+
+
 
 class CartProductManager(models.Manager):
     #método para extender al objeto objects en views.add()
