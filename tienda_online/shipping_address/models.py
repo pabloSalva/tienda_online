@@ -17,4 +17,11 @@ class ShippingAddress(models.Model):
 
     def __str__(self):
         return self.codigo_postal
+
+    @property
+    def address(self):
+        return '{}-{}-{}'.format(self.ciudad, self.provincia, self.pais)    
     
+    def update_default(self, default=False):
+        self.default = default
+        self.save()

@@ -2,8 +2,20 @@ from django.db import models
 
 from django.contrib.auth.models import User
 
+# class User(AbstractUser):
+#     def get_full_name(self):
+#         return '{} {}'.format(self.first_name, self.last_name)
+
+#     @property
+#     def shipping_address(self):
+#         return self.shippingaddress_set.filter(default=True).first()
+
+
+
+
 class Customer(User):
-    class Meta: #utilizo esta clase para agregar funcionalidad al modelo User preestablecido
+    #utilizo esta clase para agregar funcionalidad al modelo User preestablecido
+    class Meta: 
         proxy = True  
 
     def get_products(self):

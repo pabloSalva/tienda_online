@@ -30,6 +30,7 @@ urls que condicionan el estado "active" de la barra de navegación
             </li>
         </ul>
 
+        {% if user.is_authenticated %}
         <ul class="navbar-nav">
             <li class="nav-item {% if request.path == shipping_addresses%}active{% endif%}">
                 <a class="nav-link" href="{{shipping_addresses}}">
@@ -39,7 +40,7 @@ urls que condicionan el estado "active" de la barra de navegación
                 </a>
             </li>
         </ul>
-        
+        {% endif %}
         
         <ul class="nav navbar-nav ml-auto">   
             {% if user.is_authenticated %}
