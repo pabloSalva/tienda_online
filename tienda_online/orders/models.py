@@ -3,7 +3,7 @@ from enum import Enum
 
 from django.db import models
 from carts.models import Cart
-from django.contrib.auth.models import User
+from users.models import User
 
 from django.db.models.signals import pre_save
 

@@ -10,7 +10,7 @@ from django.http import HttpResponseRedirect
 
 from .forms import RegisterForm
 
-from django.contrib.auth.models import User
+from users.models import User
 
 from products.models import Product
 

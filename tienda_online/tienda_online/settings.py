@@ -57,6 +57,9 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'tienda_online.urls'
 
+#Para modificar el usuario User declaro la siguiente constante. con esto le digo a django q ahora utilizo el User que creo
+AUTH_USER_MODEL = 'users.User'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
