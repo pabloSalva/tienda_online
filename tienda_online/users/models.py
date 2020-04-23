@@ -10,7 +10,8 @@ class User(AbstractUser):
     def shipping_address(self):
         return self.shippingaddress_set.filter(default=True).first()
 
-
+    def has_shipping_address(self):
+        return self.shipping_address is not None
 
 
 class Customer(User):
