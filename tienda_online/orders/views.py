@@ -35,3 +35,10 @@ def address(request):
     }
 
     return render(request, 'orders/address.html', context)
+
+
+@login_required(login_url = 'login')
+def select_address(request):
+    context = {}
+    return render(request, 'orders/select_address.html',context)    
+    
